@@ -1,2 +1,3 @@
-# blog-post
-API Blog Post Express
+ Restful API Blog with Express and MongoDB
+
+ 
