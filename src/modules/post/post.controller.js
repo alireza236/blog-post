@@ -12,7 +12,17 @@
 
  }
 
- export   async function getPostById(req, res) {
+  export async function getPostById(req, res) {
+       try {
+         const post = await Post.findById(req.params.id).populate('user');
+         return res.status(HTTPStatus.OK).json(post);
+       } catch (e) {
+         return res.status(HTTPStatus.BAD_REQUEST).json(e);
+       }
+  }
+
+
+/* export async function getPostById(req, res) {
      try {
        const promise = await Promise.all([
            User.findById(req.user._id),
@@ -29,10 +39,20 @@
      } catch (e) {
        return res.status(HTTPStatus.BAD_REQUEST).json(e);
      }
+   }*/
+
+  export   async function getPostsList(req, res) {
+       const limit = parseInt(req.query.limit, 0);
+       const skip = parseInt(req.query.skip, 0);
+     try {
+       const posts = await Post.find({}).populate('user');
+       return res.status(HTTPStatus.OK).json(posts);
+     } catch (e) {
+       return res.status(HTTPStatus.BAD_REQUEST).json(e);
+     }
    }
 
-
- export   async function getPostsList(req, res) {
+ /*export   async function getPostsList(req, res) {
      const limit = parseInt(req.query.limit, 0);
      const skip = parseInt(req.query.skip, 0);
      try {
@@ -56,9 +76,9 @@
      } catch (e) {
        return res.status(HTTPStatus.BAD_REQUEST).json(e);
      }
-   }
+   }*/
 
- export   async function updatePost(req, res) {
+ export async function updatePost(req, res) {
      try {
        const post = await Post.findById(req.params.id);
        if (!post.user.equals(req.user._id)) {
@@ -75,7 +95,7 @@
      }
    }
 
-  export   async function favoritePost(req, res) {
+  export async function favoritePost(req, res) {
      try {
        const user = await User.findById(req.user._id);
        await   user._favorites.posts(req.params.id);

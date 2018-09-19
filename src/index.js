@@ -6,6 +6,7 @@
  import middlewaresConfig from './config/middleware';
  import apiRoutes from './modules';
  import { authJwt } from './services/auth.services';
+ 
  const app = express();
  
  middlewaresConfig(app);

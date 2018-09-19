@@ -8,9 +8,7 @@ const devConfig = {
 };
 const testConfig = {};
 const prodConfig = {};
-const defaultConfig = {
-PORT: process.env.PORT || 3000,
-};
+const defaultConfig = { PORT: process.env.PORT || 3000 };
 
 function envConfig(env) {
        switch (env) {

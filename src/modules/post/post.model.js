@@ -53,9 +53,9 @@
        slug: this.slug,
        user: this.user,
        favoriteCount: this.favoriteCount,
-     };
-   },
-   };
+      };
+    },
+  };
    
    PostSchema.statics = {
      createPost(args, user) {
